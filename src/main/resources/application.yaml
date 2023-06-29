@@ -49,8 +49,8 @@ app-config.sms-sender-name: BookShop
 app-config.sms-code-text: "Verification code is:"
 
 ##EMAIL
-app-config.email-adr: pochtalion2023@mail.ru
-app-config.email-pass: i3WgFN3xpsRVmsSCtsiK
+app-config.email-adr:
+app-config.email-pass:
 app-config.email-SMTP: smtp.mail.ru
 app-config.email-port: 465
 app-config.email-code-subject: "BookShop email verification!"
