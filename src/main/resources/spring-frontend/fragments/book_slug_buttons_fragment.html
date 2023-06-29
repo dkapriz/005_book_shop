@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="panel (book, files)">
+  <div th:if="${book.status != 'PAID' && book.status != 'ARCHIVED'}" class="ProductCard-cart">
+    <div th:if="${book.status != 'KEPT'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline" data-sendstatus="KEPT" data-bookid="[1111]"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.postpone-alt-text}"
+              data-btntype="check" data-btnradio="buyblock" data-check="false"
+              data-alttext="Отложена"><span class="btn-icon"><img
+        src="/assets/img/icons/heart.svg" alt="heart.svg"/></span><span
+        class="btn-content" th:text="#{book-slug-page.postpone}">Отложить</span>
+      </button>
+    </div>
+    <div th:if="${book.status == 'KEPT'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline btn_check" data-sendstatus="KEPT" data-bookid="[1111]"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.postpone}"
+              data-btntype="check" data-btnradio="buyblock" data-check="true"
+              data-alttext="Отложить"><span class="btn-icon"><img
+        src="/assets/img/icons/heart.svg" alt="heart.svg"/></span><span
+        class="btn-content" th:text="#{book-slug-page.postpone-alt-text}">Отложена</span>
+      </button>
+    </div>
+    <div th:if="${book.status != 'CART'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline" data-sendstatus="CART" data-bookid="[1111]"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.by-alt-text}"
+              data-btntype="check" data-btnradio="buyblock" data-check="false"
+              data-alttext="В корзине"><span class="btn-icon"><img
+        src="/assets/img/icons/shopping-basket.svg"
+        alt="shopping-basket.svg"/></span>
+        <span class="btn-content" th:text="#{book-slug-page.by}">Купить</span>
+      </button>
+    </div>
+    <div th:if="${book.status == 'CART'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline btn_check" data-sendstatus="CART" data-bookid="[1111]"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.by}"
+              data-btntype="check" data-btnradio="buyblock" data-check="true"
+              data-alttext="Купить"><span class="btn-icon"><img
+        src="/assets/img/icons/shopping-basket.svg"
+        alt="shopping-basket.svg"/></span>
+        <span class="btn-content" th:text="#{book-slug-page.by-alt-text}">В корзине</span>
+      </button>
+    </div>
+  </div>
+  <div th:if="${book.status == 'PAID' || book.status == 'ARCHIVED'}" class="ProductCard-cart">
+    <div class="ProductCard-cartElement">
+      <a class="btn btn_primary btn_outline" href="#">
+        <span class="btn-icon"><img src="/assets/img/icons/download.svg" alt="download.svg"/></span>
+        <span class="btn-content" th:text="#{book-slug-page.download}">Скачать</span>
+      </a>
+    </div>
+    <div th:if="${book.status == 'PAID'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline" data-sendstatus="ARCHIVED"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.archive-alt-text}"
+              data-bookid="[1111]" data-btntype="check" data-btnradio="buyblock"
+              data-check="false" data-alttext="Вернуть из архива"><span class="btn-icon"><img
+        src="/assets/img/icons/archive.svg" alt="archive.svg"/></span><span
+        class="btn-content" th:text="#{book-slug-page.archive}">В архив</span>
+      </button>
+    </div>
+    <div th:if="${book.status == 'ARCHIVED'}" class="ProductCard-cartElement">
+      <button class="btn btn_primary btn_outline btn_check" data-sendstatus="ARCHIVED"
+              th:attr="data-bookid=${'['+book.id+']'}, data-alttext=#{book-slug-page.archive}"
+              data-bookid="[1111]" data-btntype="check" data-btnradio="buyblock"
+              data-check="true" data-alttext="В архив"><span class="btn-icon"><img
+        src="/assets/img/icons/archive.svg" alt="archive.svg"/></span><span
+        class="btn-content" th:text="#{book-slug-page.archive-alt-text}">Вернуть из архива</span>
+      </button>
+    </div>
+  </div>
+  <div id="book-download-popup" class="modal modal_dropdown_download">
+    <div class="modal-window">
+      <strong class="modal-title" th:text="#{book-slug-page.download-book}">Скачать книгу
+      </strong>
+      <a id="book-download-popup__close" class="modal-close" href="#"><span></span><span></span></a>
+        <div th:if="${files.result}">
+          <div th:if="${files.bookFileList.size() != 0}" th:each="file : ${files.bookFileList}">
+            <a href="#" th:href="'/books/download/' + ${file.hash}"
+               th:text="${file.fileType + ' ' + file.fileTypeDescription + ' - ' + file.fileSize}"></a>
+          </div>
+          <p th:if="${files.bookFileList.size() == 0 && #locale.language == 'ru'}">Файлы не доступны для скачивания.
+            <a href="#" th:href="@{/contacts}">Обратитесь в техподдержку.</a>
+          </p>
+          <p th:if="${files.bookFileList.size() == 0 && #locale.language == 'en'}">The files are not available for download.
+            <a href="#" th:href="@{/contacts}">Contact technical support.</a>
+          </p>
+        </div>
+        <span th:if="${!files.result}">
+          <span th:if="${#locale.language == 'ru'}">
+            <p>Вы превысили лимит скачивания данной книги. <a href="#" th:href="@{/contacts}">
+              Обратитесь в техподдержку</a>, если хотите скачать книгу снова.</p>
+          </span>
+          <span th:if="${#locale.language == 'en'}">
+            <p>You have exceeded the download limit of this book. <a href="#" th:href="@{/contacts}">
+              Contact technical support</a> if you want to download the book again.</p>
+          </span>
+        </span>
+    </div>
+  </div>
+  <div id="overlay" class="overlay-page"></div>
+</div>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тут название страницы написать</title>
+    <meta name="description" content="Описание страницы">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/fonts.min.css?v=77124975">
+    <link rel="stylesheet" href="/assets/css/basic.min.css?v=77124975">
+    <link rel="stylesheet" href="/assets/css/extra.min.css?v=77124975">
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script defer src="/assets/js/scripts.min.js?v=77124975"></script>
+</head>
+<body class="Site">
+<header class="Header"
+        th:replace="~{fragments/common_header_fragment :: head}"></header>
+<div class="Middle">
+    <div class="wrap">
+        <main class="Middle-main">
+            <ul class="breadcrumbs"
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=#{faq-page.faq})}"></ul>
+            <h1 class="Middle-title" th:text="#{faq-page.faq}">Помощь
+            </h1>
+            <div class="FAQ">
+                <strong class="FAQ-title" th:text="#{faq-page.frequent-questions}">Наиболее частые вопросы:
+                </strong>
+                <div class="HideBlock FAQ-block">
+                    <header class="HideBlock-header HideBlock-trigger">
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'ru'}">
+                            Что делать, если я не нашел нужный товар
+                        </strong>
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'en'}">
+                            What should I do if I didn't find the right product
+                        </strong>
+                        <button class="HideBlock-btn" type="button">
+                        </button>
+                    </header>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'ru'}">
+                        <p>Если вы ввели в строке поиска название товара и увидели сообщение «Простите, по вашему
+                            запросу товаров сейчас нет», это значит, что такого товара у нас в ассортименте пока нет.
+                        </p>
+                        <p>В этом случае, вы можете добавить ссылку на искомый товар, нажав Не нашли, что искали? Мы
+                            передадим информацию менеджерам соответствующей категории и постараемся добавить товар в
+                            ассортимент.
+                        </p>
+                    </div>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'en'}">
+                        <p>If you entered the product name in the search bar and saw the message "Sorry, there are
+                            no products for your request now", it means that we do not have such a product in our
+                            assortment yet.
+                        </p>
+                        <p>In this case, you can add a link to the desired product by clicking Not found what you were
+                            looking for? We will pass the information to the managers of the appropriate category and
+                            try to add the product to the assortment.
+                        </p>
+                    </div>
+                </div>
+                <div class="HideBlock FAQ-block">
+                    <header class="HideBlock-header HideBlock-trigger">
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'ru'}">
+                            Товара нет в наличии
+                        </strong>
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'en'}">
+                            The product is out of stock
+                        </strong>
+                        <button class="HideBlock-btn" type="button">
+                        </button>
+                    </header>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'ru'}">
+                        <p>Мы регулярно пополняем запасы товаров на складах. Чтобы узнать о поступлении товара,
+                            подпишитесь на уведомления, нажав кнопку Узнать о поступлении.
+                        </p>
+                    </div>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'en'}">
+                        <p>We regularly replenish stocks of goods in warehouses. To find out about the receipt of the
+                            product, subscribe to notifications by clicking the Learn about receipt button.
+                        </p>
+                    </div>
+                </div>
+                <div class="HideBlock FAQ-block">
+                    <header class="HideBlock-header HideBlock-trigger">
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'ru'}"
+                        >У товара слишком высокая цена
+                        </strong>
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'en'}">
+                            The price of the product is too high
+                        </strong>
+                        <button class="HideBlock-btn" type="button">
+                        </button>
+                    </header>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'ru'}">
+                        <p>Вы можете дождаться скидки на интересующий товар. Чтобы не пропустить снижение цены, нажмите
+                            кнопку Это дорого? на карточке товара. Когда цена снизится, мы пришлем вам уведомление.
+                        </p>
+                    </div>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'en'}">
+                        <p>You can wait for a discount on the product you are interested in. In order not to miss the
+                            price reduction, click Is it expensive? on the product card. When the price drops, we will
+                            send you a notification.
+                        </p>
+                    </div>
+                </div>
+                <div class="HideBlock FAQ-block">
+                    <header class="HideBlock-header HideBlock-trigger">
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'ru'}">
+                            У меня есть вопрос про товар продавца
+                        </strong>
+                        <strong class="HideBlock-title" th:if="${#locale.language == 'en'}">
+                            I have a question about the seller's product
+                        </strong>
+                        <button class="HideBlock-btn" type="button">
+                        </button>
+                    </header>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'ru'}">
+                        <p>С некоторыми продавцами можно связаться через чат. Чтобы задать интересующий вас вопрос, на
+                            карточке товара под его фотографиями нажмите Спросить продавца о товаре, далее введите ваше
+                            сообщение и дождитесь ответа.
+                        </p>
+                    </div>
+                    <div class="HideBlock-content" th:if="${#locale.language == 'en'}">
+                        <p>Some sellers can be contacted via live chat. To ask a question of interest to you, on the
+                            product card under its photos, click Ask the seller about the product, then enter your
+                            message and wait for an answer.
+                        </p>
+                    </div>
+                </div>
+                <div class="FAQ-footer">
+                    <p class="FAQ-link" th:if="${#locale.language == 'ru'}">
+                        Или&#32;<a href="/contacts.html" th:href="@{/contacts}">свяжитесь с нами</a>
+                    </p>
+                    <p class="FAQ-link" th:if="${#locale.language == 'en'}">
+                        Or&#32;<a href="/contacts.html" th:href="@{/contacts}">contact us</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>

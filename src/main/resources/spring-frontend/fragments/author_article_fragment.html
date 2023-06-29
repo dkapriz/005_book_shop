@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="article(author, descriptionList)">
+    <h1 class="Middle-title" th:text="${author.name}">Борис Васильевич Бедный
+    </h1>
+    <article class="Article">
+        <div class="sdf">
+        </div>
+        <div class="Spoiler">
+            <div class="Spoiler-visible">
+                <div class="pict pict_left"><img th:src="${author.photo}" src="/assets/img/content/main/card.jpg" alt="card.jpg"/>
+                </div>
+                <div>
+                    <h2 th:text="#{authors-page.biography}">Биография
+                    </h2>
+                    <p th:if="${descriptionList.size() != 0}" th:text="${descriptionList[0]}">
+                        Борис Бедный родился в семье учителя в 1916 году в станице Ярославская Краснодарского
+                        края.
+                    </p>
+                    <p th:if="${descriptionList.size() >= 2}" th:text="${descriptionList[1]}">
+                        Борис Бедный родился в семье учителя в 1916 году в станице Ярославская Краснодарского
+                        края.
+                    </p>
+                </div>
+            </div>
+            <div class="Spoiler-hide" th:if="${descriptionList.size() > 2}" th:each="str, item : ${descriptionList}">
+                <p th:if="${item.index > 1}" th:text="${str}"></p>
+            </div>
+            <div class="Spoiler-footer" th:if="${descriptionList.size() > 2}">
+                <button class="Spoiler-trigger btn btn_primary btn_nr" type="button" data-showtext="Свернуть"
+                        data-hidetext="Показать полностью"
+                        th:attr="data-showtext=#{authors-page.button-hide}, data-hidetext=#{authors-page.button-show}">
+                </button>
+            </div>
+        </div>
+    </article>
+</div>
+</html>

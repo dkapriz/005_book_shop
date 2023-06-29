@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Тут название страницы написать</title>
+  <meta name="description" content="Описание страницы">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <link href="favicon.ico" rel="shortcut icon">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/fonts.min.css?v=88436650">
+  <link rel="stylesheet" href="/assets/css/basic.min.css?v=88436650">
+  <link rel="stylesheet" href="/assets/css/extra.min.css?v=88436650">
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script defer src="/assets/js/scripts.min.js?v=88436650"></script>
+</head>
+<body class="Site">
+<header class="Header"
+        th:replace="~{fragments/common_header_fragment :: head}"></header>
+<div class="Middle">
+  <div class="wrap">
+    <main class="Middle-main">
+      <ul class="breadcrumbs"
+          th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=#{my-book-page.title})}"></ul>
+      <div class="Section">
+        <div class="Section-header">
+          <h1 class="Section-title" th:text="#{my-book-page.title}">Мои книги
+          </h1>
+          <div class="Section-header-links">
+                      <span class="Section-header-link Section-header-link_ACTIVE"
+                            th:text="#{my-book-page.unread}">Непрочитанные</span>
+            <a class="Section-header-link" th:href="@{/my/archive}"
+               th:text="#{my-book-page.archive}" href="/my/archive.html">Архив</a>
+          </div>
+        </div>
+        <div class="Cards">
+          <div th:if="${bookListUserPaid.isEmpty()}" class="Cart-messageInfo"
+               th:text="#{my-book-page.book-empty}">Книг нет
+          </div>
+          <div class="Card" th:each="book : ${bookListUserPaid}">
+            <div class="Card-picture">
+              <a th:href="'/books/' + ${book.slug}" href="/books/slug.html">
+                <img th:src="${book.image}" src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
+              <div th:if="${book.discount != 0}" th:text="${book.discount} + '% скидка'" class="Card-sale">30% скидка
+              </div>
+              <div th:if="${book.isBestseller}" class="Card-ribbon"><span class="Card-ribbonText">Бестселлер</span>
+              </div>
+              <a th:if="${book.status == 'PAID'}" class="Card-status" title="Куплена"><img
+                src="/assets/img/icons/check.svg" alt="check.svg"/></a>
+              <a th:if="${book.status == 'KEPT'}" class="Card-status" title="Отложена"><img
+                src="/assets/img/icons/heart.svg" alt="heart.svg"/></a>
+              <a th:if="${book.status == 'CART'}" class="Card-status" title="В корзине"><img
+                src="/assets/img/icons/shopping-basket.svg" alt="shopping-basket.svg"/></a>
+            </div>
+            <div class="Card-content">
+              <strong class="Card-title">
+                <a th:href="'/books/' + ${book.slug}" href="#" th:text="${book.title}">Техника</a>
+              </strong>
+              <div class="Card-description" th:text="${book.authors}">Кондратенко Александр Петрович
+              </div>
+              <div class="Card-cost">
+                <span class="Card-priceOld"
+                      th:if="${book.discount != 0}" th:text="'₽' + ${book.price}">₽300.00</span>
+                <span class="Card-price" th:text="'₽' + ${book.discountPrice}">₽190.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>

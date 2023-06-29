@@ -1,0 +1,146 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="d.kapriz" id="d.kapriz_000000002">
+        <addColumn tableName="book">
+            <column defaultValueNumeric="0" name="popular_index" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000003">
+        <modifyDataType tableName="book" columnName="rating" newDataType="FLOAT8"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000004">
+        <modifyDataType tableName="tags" columnName="weight" newDataType="FLOAT8"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000005">
+        <addColumn tableName="tags">
+            <column defaultValueNumeric="0" name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addUniqueConstraint columnNames="slug" constraintName="uk_45m2e40c3fst1209f4x4fci7t" tableName="tags"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000006">
+        <addColumn tableName="book_file">
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book_file" constraintName="fksn8qxbyr28m2caf0yd9l1siix" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000007">
+        <dropNotNullConstraint tableName="book_evaluation" columnName="user_id"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000008">
+        <addColumn tableName="book_review">
+            <column defaultValueNumeric="0" name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000009">
+        <dropNotNullConstraint tableName="book_review_like" columnName="user_id"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000010">
+        <addNotNullConstraint tableName="book_review_like" columnName="user_id"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000011">
+        <dropNotNullConstraint tableName="book_review_like" columnName="user_id"/>
+        <addColumn tableName="book_review_like">
+            <column name="hash_code" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000012">
+        <createSequence sequenceName="jwt_pkey_seq"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000013">
+        <createTable tableName="jwt_black_list">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="jwt_pkey"/>
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000013">
+        <createSequence sequenceName="yoo_cash_pkey_seq"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000014">
+        <createTable tableName="yoo_cash_operation">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="yoo_cash_pkey"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operation_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="idempotency_key" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sum" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_method" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000015">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="yoo_cash_operation" constraintName="fkigqfory4r22pqd0sl4csnwp95" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000016">
+        <dropNotNullConstraint tableName="yoo_cash_operation" columnName="payment_method"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000017">
+        <dropNotNullConstraint tableName="yoo_cash_operation" columnName="operation_id"/>
+        <dropNotNullConstraint tableName="yoo_cash_operation" columnName="sum"/>
+        <dropNotNullConstraint tableName="yoo_cash_operation" columnName="time"/>
+        <dropNotNullConstraint tableName="yoo_cash_operation" columnName="status"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000018">
+        <dropNotNullConstraint tableName="balance_transaction" columnName="book_id"/>
+    </changeSet>
+    <changeSet author="d.kapriz" id="d.kapriz_000000019">
+        <createTable tableName="book2user_recently_view">
+            <column name="time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000020">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book2user_recently_view" constraintName="fk1i0i82ro8hbv1wepiutenmj7x" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000021">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book2user_recently_view" constraintName="fk7cd54daf7pi2re147sfv010b3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet author="d.kapriz (generated)" id="d.kapriz_000000022">
+        <addPrimaryKey columnNames="book_id, user_id" constraintName="book2user_recently_view_pkey" tableName="book2user_recently_view"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тут название страницы написать</title>
+    <meta name="description" content="Описание страницы">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/fonts.min.css?v=16590401">
+    <link rel="stylesheet" href="/assets/css/basic.min.css?v=16590401">
+    <link rel="stylesheet" href="/assets/css/extra.min.css?v=16590401">
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script defer src="/assets/js/scripts.min.js?v=16590401"></script>
+</head>
+<body class="Site">
+<header class="Header"
+        th:replace="~{fragments/common_header_fragment :: head(main='menu-item menu-item_ACTIVE')}">
+</header>
+<div class="Middle">
+    <div class="wrap">
+        <main class="Middle-main">
+            <h1 class="Middle-title" th:text="#{documents-page.documents}">Документы
+            </h1>
+            <div class="Section">
+                <div class="Documents">
+                    <div class="Documents-wrap"><a class="Documents-item" href="/documents/slug.html">
+                        <div class="Documents-image"><img src="/assets/img/content/documents/1.jpg" alt="1.jpg"/>
+                        </div>
+                        <div class="Documents-content">
+                            <strong class="Documents-title" th:text="#{documents-page.public-offer}">Публичная оферта
+                            </strong>
+                            <span th:if="${#locale.language == 'ru'}">
+                                <p>Согласно закону, публичная оферта – это предложение, которое, во-первых, адресовано
+                                    неопределенному кругу лиц, во-вторых, содержит все существенные условия договора, и,
+                                    в-третьих, достаточно определенно выражает намерение предприятия-оферента считать себя
+                                    заключившим договор с любым
+                                </p>
+                                <p>Согласно закону, публичная оферта – это предложение, которое, во-первых, адресовано
+                                    неопределенному кругу лиц, во-вторых, содержит все существенные условия договора, и,
+                                    в-третьих, достаточно определенно выражает намерение предприятия-оферента считать себя
+                                    заключившим договор с любым
+                                </p>
+                            </span>
+                            <span th:if="${#locale.language == 'en'}">
+                                <p>According to the law, a public offer is an offer that,
+                                    firstly, is addressed to an indefinite circle of persons, secondly, contains all the
+                                    essential terms of the contract, and, thirdly, quite clearly expresses the intention of
+                                    the offeror to consider himself to have concluded a contract with any
+                                </p>
+                                <p>According to the law, a public offer is an offer that,
+                                    firstly, is addressed to an indefinite circle of persons, secondly, contains all the
+                                    essential terms of the contract, and, thirdly, quite clearly expresses the intention of
+                                    the offeror to consider himself to have concluded a contract with any
+                                </p>
+                            </span>
+                        </div>
+                    </a><a class="Documents-item" href="/documents/slug.html">
+                        <div class="Documents-image"><img src="/assets/img/content/documents/2.jpg" alt="2.jpg"/>
+                        </div>
+                        <div class="Documents-content">
+                            <strong class="Documents-title" th:text="#{documents-page.policy}">Политика обработки персональных данных
+                            </strong>
+                            <span th:if="${#locale.language == 'ru'}">
+                                <p>Согласно закону, публичная оферта – это предложение, которое, во-первых, адресовано
+                                    неопределенному кругу лиц, во-вторых, содержит все существенные условия договора, и,
+                                    в-третьих, достаточно определенно выражает намерение предприятия-оферента считать себя
+                                    заключившим договор с любым
+                                </p>
+                            </span>
+                            <span th:if="${#locale.language == 'en'}">
+                                <p>According to the law, a public offer is an offer that,
+                                    firstly, is addressed to an indefinite circle of persons, secondly, contains all the
+                                    essential terms of the contract, and, thirdly, quite clearly expresses the intention of
+                                    the offeror to consider himself to have concluded a contract with any
+                                </p>
+                            </span>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>

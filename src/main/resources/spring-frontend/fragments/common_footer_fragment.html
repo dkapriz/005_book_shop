@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<footer class="Footer" th:fragment="footer">
+  <script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+  <div class="wrap">
+    <div class="row Footer-main">
+      <div class="row-block"
+           th:replace="~{fragments/footer_left_side_info_block_fragment :: block}"></div>
+      <div class="row-block">
+        <ul class="menu menu_vt Footer-menu">
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/}" th:text="#{top-bottom-bar.main}" href="/index.html">Главная</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/genres}" th:text="#{top-bottom-bar.genres}" href="/genres/index.html">Жанры</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/books/recent}" th:text="#{top-bottom-bar.recent}" href="/books/recent.html">Новинки</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/books/popular}" th:text="#{top-bottom-bar.popular}" href="/books/popular.html">Популярное</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:if="${status == 'authorized'}" th:href="@{/books/viewed}" th:text="#{top-bottom-bar.viewed}" href="/books/viewed.html">Просмотренное</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/authors}" th:text="#{top-bottom-bar.authors}" href="/authors/index.html">Авторы</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row-block">
+        <ul class="menu menu_vt Footer-menu">
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/signin}" th:text="#{bottom-bar.sign-in}" href="/signin.html">Войти</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/documents}" th:text="#{bottom-bar.documents}" href="/documents/index.html">Документы</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/about}" th:text="#{bottom-bar.about}" href="/about.html">О компании</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/faq}" th:text="#{bottom-bar.faq}" href="/faq.html">Помощь</a>
+          </li>
+          <li class="menu-item">
+            <a class="menu-link" th:href="@{/contacts}" th:text="#{bottom-bar.contacts}" href="/contacts.html">Контакты</a>
+          </li>
+          <li class="menu-item">
+            <img class="image-ru-flag" src="/assets/img/ru_flag.png" alt="ru_flag.png"/>
+            <img class="image-en-flag" src="/assets/img/en_flag.png" alt="en_flag.png"/>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="Footer-copy">
+    <div class="wrap">© 2023 <span th:text="${shopName}">Bookland</span> Pty Ltd. ALL RIGHTS RESERVED
+    </div>
+  </div>
+</footer>
+</html>

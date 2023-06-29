@@ -1,0 +1,57 @@
+server.port: 8085
+
+spring.output.ansi.enabled: ALWAYS
+spring.messages.basename: lang.messages
+spring.resources.static-locations: classpath:/spring-frontend/
+spring.thymeleaf.prefix: classpath:/spring-frontend/
+
+spring.datasource.url: jdbc:postgresql://localhost:5432/bookshop-test
+spring.datasource.username: d.kapriz
+spring.datasource.driver-class-name: org.postgresql.Driver
+#spring.datasource.data: classpath:data.sql
+#spring.datasource.schema: classpath:schema.sql
+#spring.datasource.initialization-mode: always
+spring.jpa.hibernate.ddl-auto: create
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.show-sql: true
+
+spring.liquibase.enabled: false
+spring.liquibase.change-log: classpath:/db/changelog/db.changelog-master.xml
+
+##JWTBlackList
+app-config.auth-secret: apple
+server.servlet.session.tracking-modes: cookie
+
+##oauth2
+spring.security.oauth2.client.registration:
+  google:
+    client-id: 211363442466-k4nh1kgmcnntcnj03ajeso3ovsrt2lui.apps.googleusercontent.com
+    client-secret: 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
+app-config.oauth-redirect-uri: "http://localhost:8085/my"
+
+##MainMenuPages parameters
+app-config.th-page-book-show-limit: 20
+
+##FILE STORAGE
+app-config.upload-path: C:/Users/d.kapriz/Desktop/SKJava/Java_Spring/bookshop/00_STORAGE/book-covers
+app-config.download-path: C:/Users/d.kapriz/Desktop/SKJava/Java_Spring/bookshop/00_STORAGE/book-files
+
+##SMS
+app-config.sms-api-host: http://api.atompark.com/api/sms/3.0
+app-config.sms-public-key: b5207f95569bdf73f97492a054d94fe3
+app-config.sms-private-key: 285197704dd7755c9bae723c74662caa
+app-config.sms-sender-name: BookShop
+app-config.sms-code-text: "Verification code is:"
+
+##EMAIL
+app-config.email-adr: pochtalion2023@mail.ru
+app-config.email-pass: i3WgFN3xpsRVmsSCtsiK
+app-config.email-SMTP: smtp.mail.ru
+app-config.email-port: 465
+app-config.email-code-subject: "BookShop email verification!"
+app-config.email-code-text: "Verification code is:"
+
+##CONFIRMATION CODE
+app-config.code-max-trials-entry: 3
+app-config.code-expired-time: 10
+app-config.code-time-out: 5

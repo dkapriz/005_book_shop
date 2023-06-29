@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="Cards Cards_refresh" th:fragment="pool(bookListFragment, category, refreshParam, totalBookCount)">
+    <div class="Card" th:each="book : ${bookListFragment}">
+        <div class="Card-picture">
+            <a th:href="'/books/' + ${book.slug}" href="/books/slug.html">
+                <img th:src="${book.image}" src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
+            <div th:if="${book.discount != 0}" th:text="${book.discount} + '% скидка'" class="Card-sale">30% скидка
+            </div>
+            <div th:if="${book.isBestseller}" class="Card-ribbon"><span class="Card-ribbonText">Бестселлер</span>
+            </div>
+            <a th:if="${book.status == 'PAID'}" class="Card-status" title="Куплена"><img
+                    src="/assets/img/icons/check.svg" alt="check.svg"/></a>
+            <a th:if="${book.status == 'KEPT'}" class="Card-status" title="Отложена"><img
+                    src="/assets/img/icons/heart.svg" alt="heart.svg"/></a>
+            <a th:if="${book.status == 'CART'}" class="Card-status" title="В корзине"><img
+                    src="/assets/img/icons/shopping-basket.svg" alt="shopping-basket.svg"/></a>
+        </div>
+        <div class="Card-content">
+            <strong class="Card-title">
+                <a th:href="'/books/' + ${book.slug}" href="#" th:text="${book.title}">Техника</a>
+            </strong>
+            <div class="Card-description" th:text="${book.authors}">Кондратенко Александр Петрович
+            </div>
+            <div class="Card-cost">
+                <span class="Card-priceOld"
+                      th:if="${book.discount != 0}" th:text="'₽' + ${book.price}">₽300.00</span>
+                <span class="Card-price" th:text="'₽' + ${book.discountPrice}">₽190.00</span>
+            </div>
+        </div>
+    </div>
+    <div id="btn-show-more" class="Cards-footer Cards-footer_center" th:if="${totalBookCount > 20}">
+        <a class="btn btn_primary" href="#"  data-refreshshow="recent"
+           data-refreshoffset="0" data-refreshlimit="20" data-refreshtotal="0" th:text="#{fragment-books-pool.show-more}"
+           th:attr="data-refreshshow = ${category}, data-refreshparam = ${refreshParam}"
+           data-refreshquery="Техника">Показать еще</a>
+    </div>
+</div>
+</html>

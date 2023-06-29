@@ -1,0 +1,71 @@
+server.port: 8085
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+spring.output.ansi.enabled: ALWAYS
+spring.messages.basename: lang.messages
+spring.resources.static-locations: classpath:/spring-frontend/
+spring.thymeleaf.prefix: classpath:/spring-frontend/
+
+spring.datasource.url: jdbc:postgresql://localhost:5432/bookshop
+spring.datasource.username:
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto: validate
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.show-sql: true
+
+spring.liquibase.enabled: true
+spring.liquibase.change-log: classpath:/db/changelog/db.changelog-master.xml
+
+##shop name
+app-config.shop-name: Bookland
+
+##JWTBlackList
+app-config.auth-secret: apple
+server.servlet.session.tracking-modes: cookie
+
+##oauth2
+spring.security.oauth2.client.registration:
+  google:
+    client-id:
+    client-secret:
+app-config.oauth-redirect-uri: "http://localhost:8085/my"
+
+##MainMenuPages parameters
+app-config.th-page-book-show-limit: 20
+
+##FILE STORAGE
+app-config.upload-path: C:/Users/d.kapriz/Desktop/SKJava/Java_Spring/bookshop/00_STORAGE/book-covers
+app-config.download-path: C:/Users/d.kapriz/Desktop/SKJava/Java_Spring/bookshop/00_STORAGE/book-files
+app-config.max-download-count: 3
+
+##SMS
+app-config.sms-api-host: http://api.atompark.com/api/sms/3.0
+app-config.sms-public-key:
+app-config.sms-private-key:
+app-config.sms-sender-name: BookShop
+app-config.sms-code-text: "Verification code is:"
+
+##EMAIL
+app-config.email-adr: pochtalion2023@mail.ru
+app-config.email-pass: i3WgFN3xpsRVmsSCtsiK
+app-config.email-SMTP: smtp.mail.ru
+app-config.email-port: 465
+app-config.email-code-subject: "BookShop email verification!"
+app-config.email-code-text: "Verification code is:"
+
+##CONFIRMATION CODE
+app-config.code-max-trials-entry: 3
+app-config.code-expired-time: 10 #minutes
+app-config.code-time-out: 5 #minutes
+
+##PAYMENT
+app-config.payment-secret:
+app-config.payment-id:
+app-config.payment-uri:
+app-config.payment-currency: "RUB"
+app-config.payment-method-data: "bank_card"
+app-config.payment-redirect-uri-balance: "http://localhost:8085/profile"
+app-config.payment-redirect-uri-cart: "http://localhost:8085/order"

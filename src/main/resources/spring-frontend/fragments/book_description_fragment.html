@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="ProductCard-desc" th:fragment="bookDesc (book, authors, distributionRating, tags, files)">
+    <div class="ProductCard-header">
+        <h1 class="ProductCard-title" th:text="${book.title}">Мара и морок
+        </h1>
+        <div class="ProductCard-author">
+            <span class="ProductCard-titleProp"
+                  th:text="${authors.size() > 1} ? #{book-slug-page.authors} : #{book-slug-page.author}">Автор:
+            </span>&#32;
+            <span th:each="author, item : ${authors}">
+                <a th:href="'/authors/' + ${author.slug}"
+                   th:text="${item.last} ? ${author.name} : ${author.name} + ', '" href="#">Лия Арден
+                </a>
+            </span>
+        </div>
+        <div class="ProductCard-rating">
+            <span class="ProductCard-titleProp" th:text="#{book-slug-page.rating}">Рейтинг:</span>
+            <button class="trigger trigger_dropdown" type="button">
+                <div class="Rating Rating_noStyleLink">
+                    <span class="Rating-stars" th:each="i : ${#numbers.sequence(1, 5, 1)}">
+                        <span class="Rating-star Rating-star_view"
+                              th:class="${book.rating >= i} ? 'Rating-star Rating-star_view' : 'Rating-star'">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                            <g>
+                              <g>
+                                <path fill="#ffc000"
+                                      d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                              </g>
+                            </g>
+                          </svg>
+                        </span>
+                    </span><span class="Rating-title" th:text="${distributionRating.count}">(567)</span>
+                </div>
+                <div class="modal modal_compression modal_dropdown">
+                    <div class="modal-window"><a class="modal-close"
+                                                 href="#"><span></span><span></span></a>
+                        <strong class="modal-title" th:text="#{book-slug-page.distribution-ratings}">Распределение оценок
+                        </strong>
+                        <div class="RatingGroup" th:each="line, item : ${#numbers.sequence(5, 1, -1)}">
+                            <span class="Rating">
+                                <span class="Rating-stars" th:each="i : ${#numbers.sequence(1, 5, 1)}">
+                                    <span class="Rating-star Rating-star_view"
+                                          th:class="${line >= i} ? 'Rating-star Rating-star_view' : 'Rating-star'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                                          <g>
+                                            <g>
+                                              <path fill="#ffc000"
+                                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                                            </g>
+                                          </g>
+                                        </svg>
+                                    </span>
+                                </span>
+                                <span class="Rating-title" th:text="${distributionRating.value.get(line)}">1</span>
+                            </span>
+                            <br th:if="${!item.last}">
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <div class="ProductCard-assessment">
+            <span class="ProductCard-titleProp" th:text="#{book-slug-page.rate-book}">Оцените книгу:</span>
+            <span class="Rating Rating_input" data-bookid="2121" th:attr="data-bookid=${book.id}">
+                <span class="Rating-stars">
+                    <span class="Rating-star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                          <g>
+                            <g>
+                              <path fill="#ffc000"
+                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                    </span>
+                    <input name="rating" type="radio" value="1"/>
+                    <span class="Rating-star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                          <g>
+                            <g>
+                              <path fill="#ffc000"
+                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                    </span>
+                    <input name="rating" type="radio" value="2"/>
+                    <span class="Rating-star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                          <g>
+                            <g>
+                              <path fill="#ffc000"
+                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                    </span>
+                    <input name="rating" type="radio" value="3"/>
+                    <span class="Rating-star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                          <g>
+                            <g>
+                              <path fill="#ffc000"
+                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                    </span>
+                    <input name="rating" type="radio" value="4"/>
+                    <span class="Rating-star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                          <g>
+                            <g>
+                              <path fill="#ffc000"
+                                    d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                    </span>
+                    <input name="rating" type="radio" value="5"/>
+                </span>
+            </span>
+        </div>
+        <div class="ProductCard-tags">
+            <span class="ProductCard-titleProp" th:text="#{book-slug-page.tags}">Тэги:</span>
+            <span th:each="tag, item : ${tags}">
+                <a href="/tags/" th:href="'/tags/' + ${tag.slug}" th:text="${tag.name}">Современные</a>
+                <span th:if="${!item.last}">,&#32;</span>
+            </span>
+        </div>
+        <div class="ProductCard-cost">
+            <span class="ProductCard-titleProp" th:text="#{book-slug-page.cost}">Цена:</span>
+            <span class="ProductCard-priceOld" th:if="${book.price != book.discountPrice}" th:text="'₽' + ${book.price}">₽300</span>
+            <span class="ProductCard-price" th:text="'₽' + ${book.discountPrice}">₽180</span>
+        </div>
+    </div>
+    <div class="ProductCard-text">
+        <p th:text="${book.description}">Text
+        </p>
+    </div>
+    <div th:replace="~{fragments/book_slug_buttons_fragment :: panel (book=${book}, files=${files})}"></div>
+</div>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тут название страницы написать</title>
+    <meta name="description" content="Описание страницы">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/fonts.min.css?v=10496799">
+    <link rel="stylesheet" href="/assets/css/basic.min.css?v=10496799">
+    <link rel="stylesheet" href="/assets/css/extra.min.css?v=10496799">
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script defer src="/assets/js/scripts.min.js?v=10496799"></script>
+</head>
+<body class="Site">
+<header class="Header"
+        th:replace="~{fragments/common_header_fragment :: head}"></header>
+<div class="Middle">
+    <div class="Middle-top">
+        <div class="wrap">
+            <h1 class="Middle-title" th:text="#{contacts-page.contacts}">Контакты
+            </h1>
+        </div>
+    </div>
+    <div class="wrap">
+        <main class="Middle-main">
+            <ul class="breadcrumbs"
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=#{contacts-page.contacts})}"></ul>
+            <div class="Contacts">
+                <div class="row">
+                    <div class="row-block">
+                        <h2 th:text="#{contacts-page.contacts}">Контакты
+                        </h2>
+                        <div class="Contacts-prop">
+                            <strong class="Contacts-propTitle" th:text="#{contacts-page.phone}">Телефон:
+                            </strong><span class="Contacts-propContent">8 (800) 484-48-48</span>
+                        </div>
+                        <div class="Contacts-prop">
+                            <strong class="Contacts-propTitle" th:text="#{contacts-page.email}">E-mail:
+                            </strong><span class="Contacts-propContent">test@test.ru</span>
+                        </div>
+                        <div class="Contacts-prop">
+                            <strong class="Contacts-propTitle" th:text="#{contacts-page.telegram}">Телеграм-бот:
+                            </strong><span class="Contacts-propContent">@testBookShop</span>
+                        </div>
+                    </div>
+                    <div class="row-block">
+                        <div class="Contacts-form">
+                            <h2 th:text="#{contacts-page.write}">Напишите нам:
+                            </h2>
+                            <form class="form" action="#" method="post">
+                                <div class="form-group">
+                                    <input class="form-input" id="name" name="name" type="text"
+                                           th:placeholder="#{contacts-page.name-place-holder}"
+                                           placeholder="Введите Имя" data-validate="require"/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-input form-input_mail" id="mail" name="mail" type="text"
+                                           th:placeholder="#{contacts-page.email-place-holder}"
+                                           placeholder="Введите e-mail" data-validate="mail require"/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-input" id="topic" name="topic" type="text"
+                                           th:placeholder="#{contacts-page.topic-place-holder}"
+                                           placeholder="Введите тему" data-validate="require"/>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-textarea Contacts-message" name="message" id="message"
+                                              th:placeholder="#{contacts-page.msg-place-holder}"
+                                              placeholder="Введите сообщение" data-validate="require"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn_primary form-btn" type="submit" name="sendMessage"
+                                            th:text="#{contacts-page.send-button}"
+                                            id="sendMessage">Отправить
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>

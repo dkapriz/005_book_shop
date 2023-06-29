@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тут название страницы написать</title>
+    <meta name="description" content="Описание страницы">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/fonts.min.css?v=52263780">
+    <link rel="stylesheet" href="/assets/css/basic.min.css?v=52263780">
+    <link rel="stylesheet" href="/assets/css/extra.min.css?v=52263780">
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script defer src="/assets/js/scripts.min.js?v=52263780"></script>
+</head>
+<body class="Site">
+<header class="Header" th:replace="~{fragments/common_header_fragment :: head(genres='menu-item menu-item_ACTIVE')}">
+</header>
+<div class="Middle">
+    <div class="wrap">
+        <main class="Middle-main">
+            <h1 class="Middle-title" th:text="#{genres-page.genres}">Жанры
+            </h1>
+            <div class="Section">
+                <div class="Tags Tags_genres">
+                    <div th:class="${iter.index == 0} ? 'Tags Tags_embed' : 'Tags'" class="Tags Tags_embed" th:each="genre, iter : ${genreList}">
+                        <div class="Tags-title">
+                            <div class="Tag">
+                                <a th:href="'/genres/' + ${genre.genre.slug}" href="/genres/slug.html"
+                                th:utext="${genre.genre.name} + '<span class=undefined-amount> (' +
+                                ${genre.genre.bookCount} + ')</span>'">Лёгкое чтение</a>
+                            </div>
+                        </div>
+                        <div th:class="${genreE1.genreList.size() == 0} ? 'Tag' : 'Tags'"
+                             th:each="genreE1 : ${genre.genreList}">
+                            <div th:if="${genreE1.genreList.size() != 0}" class="Tags-title">
+                                <div class="Tag">
+                                    <a th:href="'/genres/' + ${genreE1.genre.slug}" href="/genres/slug.html"
+                                       th:utext="${genreE1.genre.name} + '<span class=undefined-amount> (' +
+                                       ${genreE1.genre.bookCount} + ')</span>'">Детективы</a>
+                                </div>
+                            </div>
+                            <div th:if="${genreE1.genreList.size() != 0}" class="Tag" th:each="genreE2 : ${genreE1.genreList}">
+                                <a th:href="'/genres/' + ${genreE2.genre.slug}" href="/genres/slug.html"
+                                   th:utext="${genreE2.genre.name} + '<span class=undefined-amount> (' +
+                                   ${genreE2.genre.bookCount} + ')</span>'">Триллер</a>
+                            </div>
+                            <a th:if="${genreE1.genreList.size() == 0}"
+                               th:href="'/genres/' + ${genreE1.genre.slug}" href="/genres/slug.html"
+                               th:utext="${genreE1.genre.name} + '<span class=undefined-amount> (' +
+                               ${genreE1.genre.bookCount} + ')</span>'">Фантастика</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>

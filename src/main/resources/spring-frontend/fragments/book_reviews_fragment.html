@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="reviewBlock(reviews)">
+  <div class="Comments" th:each="review : ${reviews}">
+    <div class="Comment">
+      <div class="Comment-column Comment-column_pict">
+        <div class="Comment-avatar">
+        </div>
+      </div>
+      <div class="Comment-column">
+        <header class="Comment-header">
+          <div>
+            <strong class="Comment-title" th:text="${review.userName}">Дмитрий Петров
+              <span class="Comment-rating">
+                <span class="Rating Rating_comment">
+                  <span class="Rating-stars" th:each="i : ${#numbers.sequence(1, 5, 1)}">
+                    <span class="Rating-star Rating-star_view"
+                          th:class="${review.rating >= i} ? 'Rating-star Rating-star_view' : 'Rating-star'">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18">
+                        <g>
+                          <g>
+                            <path fill="#ffc000"
+                                  d="M9.5 14.925L3.629 18l1.121-6.512L0 6.875l6.564-.95L9.5 0l2.936 5.925 6.564.95-4.75 4.613L15.371 18z"></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </strong><span class="Comment-date" th:text="${review.timeStr}">17.04.2020 16:40</span>
+          </div>
+        </header>
+        <div class="Comment-content">
+          <div class="Spoiler">
+            <div class="Spoiler-visible">
+              <p th:text="${review.textShort}">Lorem...
+              </p>
+            </div>
+            <div class="Spoiler-hide" th:if="${!review.textExtension.isEmpty()}">
+              <p th:text="${review.textExtension}">Lorem...
+              </p>
+            </div>
+            <div class="Comment-footer">
+              <div class="Comment-appeal">
+                <button class="btn btn_white btn_like" data-btntype="check" data-check="false"
+                        data-btnradio="one1" data-likeid="333" th:attr="data-likeid=${review.id}"><span class="btn-icon"><img
+                  src="/assets/img/icons/comment/like.svg" alt="like.svg"/></span><span
+                  class="btn-content" th:text="${review.likeCount}">500</span>
+                </button>
+                <button class="btn btn_white btn_dislike" data-btntype="check" data-check="false"
+                        data-btnradio="one1" data-likeid="333" th:attr="data-likeid=${review.id}"><span class="btn-icon"><img
+                  src="/assets/img/icons/comment/dislike.svg" alt="dislike.svg"/></span><span
+                  class="btn-content" th:text="${review.dislikeCount}">50</span>
+                </button>
+              </div>
+              <button th:if="${!review.textExtension.isEmpty()}"
+                      class="Spoiler-trigger btn btn_primary btn_nr" type="button"
+                      data-showtext="Свернуть отзыв" data-hidetext="Показать отзыв полностью"
+                      th:attr="data-showtext=#{book-slug-page.collapse-review}, data-hidetext=#{book-slug-page.show-review}">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

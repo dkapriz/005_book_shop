@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Тут название страницы написать</title>
+  <meta name="description" content="Описание страницы">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <link href="favicon.ico" rel="shortcut icon">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-SemiBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-Medium.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Montserrat/Montserrat-ExtraBold.woff2" as="font" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/fonts.min.css?v=65675850">
+  <link rel="stylesheet" href="/assets/css/basic.min.css?v=65675850">
+  <link rel="stylesheet" href="/assets/css/extra.min.css?v=65675850">
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script defer src="/assets/js/scripts.min.js?v=65675850"></script>
+<!--  <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>-->
+<!--  <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+</head>
+<body class="Site">
+<header class="Header"
+        th:replace="~{fragments/common_header_fragment :: head}"></header>
+<div class="Middle Middle_form">
+  <div class="Middle-top">
+    <div class="wrap">
+      <h1 class="Middle-title" th:text="#{sign-up-page.page-name}">Регистрация
+      </h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <main class="Middle-main">
+      <form class="form Login Login_registration" action="#" method="post" th:object="${regForm}" th:action="@{/reg}">
+        <div class="Login-ins">
+          <div class="Login-step">
+            <div class="form-group">
+              <input class="form-input" id="name" name="name" type="text" th:field="*{name}"
+                     th:placeholder="#{sign-up-page.enter-name-place-holder}" placeholder="Введите Имя"
+                     data-validate="require"/>
+            </div>
+            <div class="form-group form-group_row">
+              <div class="form-group">
+                <input class="form-input form-input_phone" id="phone" name="phone" type="text" th:field="*{phone}"
+                       th:placeholder="#{sign-up-page.enter-phone-place-holder}" placeholder="Введите телефон"
+                       data-mask="+7 (999) 999-99-99"
+                       data-validate="require"/>
+              </div>
+              <div class="form-group form-group_key">
+                <input class="form-input form-input_code" id="phoneCode" name="phoneCode" type="text"
+                       th:placeholder="#{sign-up-page.code-phone-place-holder}"
+                       placeholder="Код из СМС" data-mask="999 999" data-validate="require key"/>
+              </div>
+              <div class="form-group">
+                <button class="btn btn_success btn_sm form-btn" type="button" name="submitPhone"
+                        disabled="disabled" id="submitPhone"
+                        th:text="#{sign-up-page.button-submit}">Подтвердить
+                </button>
+              </div>
+            </div>
+            <div class="form-group form-group_row">
+              <div class="form-group">
+                <input class="form-input form-input_mail" id="mail" name="mail" type="text" th:field="*{email}"
+                       th:placeholder="#{sign-up-page.enter-email-place-holder}" placeholder="Введите e-mail"
+                       data-validate="mail require"/>
+              </div>
+              <div class="form-group form-group_key">
+                <input class="form-input form-input_code" id="mailCode" name="mailCode" type="text"
+                       th:placeholder="#{sign-up-page.code-email-place-holder}"
+                       placeholder="Код из письма" data-mask="999 999" data-validate="require key"/>
+              </div>
+              <div class="form-group">
+                <button class="btn btn_success btn_sm form-btn" type="button" name="submitMail"
+                        disabled="disabled" id="submitMail"
+                        th:text="#{sign-up-page.button-submit}">Подтвердить
+                </button>
+              </div>
+            </div>
+            <div class="form-group form-group_center">
+              <button class="btn btn_primary form-btn" type="submit" name="registration" id="registration"
+                      disabled="disabled" th:text="#{sign-up-page.button-register}">Зарегистрироваться
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+<footer class="Footer" th:replace="~{fragments/common_footer_fragment :: footer}"></footer>
+<script src="/assets/plg/jQuery/jquery-3.6.3.min.js"></script>
+</body>
+</html>
